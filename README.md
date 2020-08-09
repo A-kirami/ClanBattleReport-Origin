@@ -1,5 +1,5 @@
 # ClanBattleReport
-> 本项目基于@倚栏待月和@mahosho的hoshino插件``retire``(离职报告)，适用于[hoshino](https://github.com/Ice-Cirno/HoshinoBot)V1，获取[Yobot](https://github.com/pcrbot/yobot)数据生成当期会战报告书
+本项目基于[@shewinder](https://github.com/shewinder)和[@mahosho](https://github.com/mahosho)的hoshino插件``retire``(离职报告)，适用于[hoshino](https://github.com/Ice-Cirno/HoshinoBot)V1，获取[Yobot](https://github.com/pcrbot/yobot)数据生成当期会战报告书
 
 ### 你应注意
 ClanBattleReport有不同的风格模板，底图与代码需配套使用
