@@ -1,8 +1,9 @@
 ﻿# ClanBattleReport
-本项目基于[@shewinder](https://github.com/shewinder)和[@mahosho](https://github.com/mahosho)的hoshino插件``retire``(离职报告)，适用于[hoshino](https://github.com/Ice-Cirno/HoshinoBot)V1，获取[Yobot](https://github.com/pcrbot/yobot)数据生成当期会战报告书
+本项目基于[@shewinder](https://github.com/shewinder)和[@mahosho](https://github.com/mahosho)的[hoshino](https://github.com/Ice-Cirno/HoshinoBot)插件``retire``(离职报告)，获取[Yobot](https://github.com/pcrbot/yobot)数据生成当期会战报告书
 
 ### 你应注意
-ClanBattleReport有不同的风格模板，底图与代码需配套使用
+1. ClanBattleReport有不同的风格模板，底图与代码需配套使用
+2. “可可萝报告”仅限V1使用，今后更新的其他主题均为V2版本，不再支持V1
 
 ### 如何使用
 0. 使用前请确认yobot的API访问已开启（默认开启，如果你关闭了api访问，请重新启用）
