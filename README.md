@@ -1,4 +1,4 @@
-# ClanBattleReport
+﻿# ClanBattleReport
 本项目基于[@shewinder](https://github.com/shewinder)和[@mahosho](https://github.com/mahosho)的hoshino插件``retire``(离职报告)，适用于[hoshino](https://github.com/Ice-Cirno/HoshinoBot)V1，获取[Yobot](https://github.com/pcrbot/yobot)数据生成当期会战报告书
 
 ### 你应注意
@@ -40,6 +40,6 @@ ClanBattleReport有不同的风格模板，底图与代码需配套使用
 
 <img src="https://i.loli.net/2020/08/09/DKysZJFr3RXlIWL.jpg" width="35%"><img src="https://i.loli.net/2020/08/09/KyzeSGC6JFLNmBv.jpg" width="35%">
 
-* **公主假日（未开放）**
+* **公主假日**
 
 <img src="https://i.loli.net/2020/08/09/QgR2pNCMAT6BhOI.jpg" width="35%"><img src="https://i.loli.net/2020/08/09/uYPsrHERLFTOGa9.jpg" width="35%">
