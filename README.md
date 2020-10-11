@@ -37,10 +37,11 @@
 > 查看他人的会战报告书（需要群管理权限）
 
 ### 当前主题
-* **可可萝的报告**
-
+<details>
+<summary>KokoroReport可可萝报告</summary>
 <img src="https://i.loli.net/2020/08/09/DKysZJFr3RXlIWL.jpg" width="35%"><img src="https://i.loli.net/2020/08/09/KyzeSGC6JFLNmBv.jpg" width="35%">
-
-* **公主假日**
-
+</details>
+<details>
+<summary>PrincessHoliday公主假日</summary>
 <img src="https://i.loli.net/2020/08/09/QgR2pNCMAT6BhOI.jpg" width="35%"><img src="https://i.loli.net/2020/08/09/uYPsrHERLFTOGa9.jpg" width="35%">
+</details>
