@@ -4,17 +4,20 @@ import requests
 import aiohttp
 from PIL import Image
 from datetime import datetime
-from hoshino.service import Service, Privilege as Priv
+from hoshino import Service,priv
 from hoshino.util import FreqLimiter
 import matplotlib.pyplot as plt
 import pandas as pd, numpy as np
-from .data_source import add_text,get_apikey,add_text1,get_GmServer
+from .data_source import add_text, get_apikey, add_text1, get_GmServer, get_db_path, get_web_address
 import base64
 background1 = '离职报告书-夏日限定.jpg'
 background2 = '会战报告书-夏日限定.jpg'
 _time_limit = 60*60#频率限制
 _lmt = FreqLimiter(_time_limit)
-yobot_url = '这里换成你的yobot地址'
+try:
+    yobot_url = get_web_address()
+except OSError:
+    yobot_url = ''  # 若非yobot插件版，请在此处配置api地址
 year = datetime.now().strftime('%Y')#年
 month = str(int(datetime.now().strftime('%m')))#去0的月
 sv = Service('公会战报告书')
@@ -49,24 +52,36 @@ def pcr_constellations(month):
         else:
             continue
     '''
+
 @sv.on_keyword(keywords='生成离职报告')
 async def create_resignation_report(bot, event):
     uid = event['user_id']
-    #nickname = event['sender']['nickname']
     gid = event['group_id']
+    #nickname = event['sender']['nickname']
+    if len(yobot_url) == 0:
+        await bot.send(event, f'获取api地址失败，请检查配置')
+        return
+    if not get_db_path():
+        await bot.send(event, f'获取数据库路径失败，请检查配置')
+        return    
     apikey = get_apikey(gid)
     global game_server
     game_server = get_GmServer(gid)
-    url = f'{yobot_url}/yobot/clan/{gid}/statistics/api/?apikey={apikey}'
+    yobot_url_without_port = yobot_url[:-5]
+    url_with_port = f'{yobot_url}/yobot/clan/{gid}/statistics/api/?apikey={apikey}'
+    url_without_port = f'{yobot_url_without_port}/yobot/clan/{gid}/statistics/api/?apikey={apikey}'
     if not _lmt.check(uid):
         await bot.send(event, f'{_time_limit/3600}小时仅能生成一次报告', at_sender=True)
         return
-    
-    #print(url)
+    print(url_with_port, url_without_port)
     #访问yobot api获取伤害等信息
     async with aiohttp.ClientSession() as session:
-        async with session.get(url) as resp:
-            data = await resp.json()
+        try:
+            async with session.get(url_with_port) as resp:
+                data = await resp.json()
+        except:
+            async with session.get(url_without_port) as resp:
+                data = await resp.json()
     clanname = data['groupinfo'][0]['group_name']
     clanname = clanname[:9]
     if clanname == 0:
@@ -237,10 +252,18 @@ async def create_resignation_report(bot, event):
     uid = event['user_id']
     #nickname = event['sender']['nickname']
     gid = event['group_id']
+    if len(yobot_url) == 0:
+        await bot.send(event, f'获取api地址失败，请检查配置')
+        return
+    if not get_db_path():
+        await bot.send(event, f'获取数据库路径失败，请检查配置')
+        return
     apikey = get_apikey(gid)
     global game_server
     game_server = get_GmServer(gid)
-    url = f'{yobot_url}/yobot/clan/{gid}/statistics/api/?apikey={apikey}'
+    yobot_url_without_port = yobot_url[:-5]
+    url_with_port = f'{yobot_url}/yobot/clan/{gid}/statistics/api/?apikey={apikey}'
+    url_without_port = f'{yobot_url_without_port}/yobot/clan/{gid}/statistics/api/?apikey={apikey}'
     if not _lmt.check(uid):
         await bot.send(event, f'{_time_limit/3600}小时仅能生成一次报告', at_sender=True)
         return
@@ -248,8 +271,12 @@ async def create_resignation_report(bot, event):
     #print(url)
     #访问yobot api获取伤害等信息
     async with aiohttp.ClientSession() as session:
-        async with session.get(url) as resp:
-            data = await resp.json()
+        try:
+            async with session.get(url_with_port) as resp:
+                data = await resp.json()
+        except:
+            async with session.get(url_without_port) as resp:
+                data = await resp.json()
     clanname = data['groupinfo'][0]['group_name']
     clanname = clanname[:9]
     challenges: list = data['challenges']
@@ -409,22 +436,33 @@ async def create_resignation_report(bot, event):
 
 @sv.on_rex(r'^看看报告$', normalize=False)
 async def create_resignation_report(bot, ctx, match):
-    if not sv.check_priv(ctx, Priv.ADMIN):
+    if not sv.check_priv(ctx, priv.ADMIN):
         return
     for m in ctx['message']:
         if m.type == 'at' and m.data['qq'] != 'all':
             uid = int(m.data['qq'])
     gid = ctx['group_id']
+    if len(yobot_url) == 0:
+        await bot.send(ctx, f'获取api地址失败，请检查配置')
+        return
+    if not get_db_path():
+        await bot.send(ctx, f'获取数据库路径失败，请检查配置')
+        return
     apikey = get_apikey(gid)
     global game_server
     game_server = get_GmServer(gid)
-    url = f'{yobot_url}/yobot/clan/{gid}/statistics/api/?apikey={apikey}'
-    
+    yobot_url_without_port = yobot_url[:-5]
+    url_with_port = f'{yobot_url}/yobot/clan/{gid}/statistics/api/?apikey={apikey}'
+    url_without_port = f'{yobot_url_without_port}/yobot/clan/{gid}/statistics/api/?apikey={apikey}'
     #print(url)
     #访问yobot api获取伤害等信息
     async with aiohttp.ClientSession() as session:
-        async with session.get(url) as resp:
-            data = await resp.json()
+        try:
+            async with session.get(url_with_port) as resp:
+                data = await resp.json()
+        except:
+            async with session.get(url_without_port) as resp:
+                data = await resp.json()
     clanname = data['groupinfo'][0]['group_name']
     clanname = clanname[:9]
     challenges: list = data['challenges']

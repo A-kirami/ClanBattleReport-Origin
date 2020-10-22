@@ -1,8 +1,39 @@
 ﻿import sqlite3
 from PIL import Image,ImageFont,ImageDraw
-from os import path
+import os
+import json
 
-font_path = path.join(path.dirname(__file__), 'TXQYW3.ttf')
+def get_db_path():
+    if not (os.path.isfile(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../"
+                                                        "yobot/yobot/src/client/yobot_data/yobotdata.db"))) or os.access(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../"
+                                                                                                                                                      "yobot/yobot/src/client/yobot_data/yobotdata.db")), os.R_OK)):
+        raise OSError
+    db_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../"
+                                           "yobot/yobot/src/client/yobot_data/yobotdata.db"))
+    return db_path
+
+
+def get_web_address():
+    if not (os.path.isfile(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../"
+                                                        "yobot/yobot/src/client/yobot_data/yobotdata.db"))) or os.access(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../"
+                                                                                                                                                      "yobot/yobot/src/client/yobot_data/yobotdata.db")), os.R_OK)):
+        raise OSError
+    config_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../"
+                                               "yobot/yobot/src/client/yobot_data/yobot_config.json"))
+    with open(f'{config_path}', 'r', encoding='utf8')as fp:
+        yobot_config = json.load(fp)
+        public_address = str(yobot_config["public_address"])
+        if str(yobot_config["public_address"]).endswith("/"):
+            public_address = str(yobot_config["public_address"])[:-1]
+        web_address = public_address + ":" + str(yobot_config["port"])
+        return web_address
+
+font_path = os.path.join(os.path.dirname(__file__), 'TXQYW3.ttf')
+
+try:
+    db_path = get_db_path()
+except OSError:
+    db_path = ''  # 若非yobot插件版，请在此处配置数据库路径
 
 def add_text(img: Image,text:str,textsize:int,font=font_path,textfill='black',position:tuple=(0,0)):
     #textsize 文字大小
