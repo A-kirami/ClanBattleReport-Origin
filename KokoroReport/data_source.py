@@ -1,8 +1,32 @@
 ﻿import sqlite3
 from PIL import Image,ImageFont,ImageDraw
-from os import path
+import os
+import json
+import hoshino
 
-font_path = path.join(path.dirname(__file__), 'TXQYW3.ttf')
+def get_db_path():
+    if not (os.path.isfile(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../"
+                                                        "yobot/yobot/src/client/yobot_data/yobotdata.db"))) or os.access(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../"
+                                                                                                                                                      "yobot/yobot/src/client/yobot_data/yobotdata.db")), os.R_OK)):
+        raise OSError
+    db_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../"
+                                           "yobot/yobot/src/client/yobot_data/yobotdata.db"))
+    return db_path
+
+
+def get_web_address():
+    if not os.path.isfile(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../"
+                                                        "yobot/yobot/src/client/yobot_data/yobotdata.db"))) :
+        raise OSError
+    web_address = "http://127.0.0.1" + ":" + str(hoshino.config.PORT)
+    return web_address
+
+font_path = os.path.join(os.path.dirname(__file__), 'TXQYW3.ttf')
+
+try:
+    db_path = get_db_path()
+except OSError:
+    db_path = ''  # 若非yobot插件版，请在此处配置数据库路径
 
 def add_text(img: Image,text:str,textsize:int,font=font_path,textfill='black',position:tuple=(0,0)):
     #textsize 文字大小
@@ -25,9 +49,6 @@ def add_text1(img: Image,text:str,textsize:int,font=font_path,textfill='white',p
     return img
     
 def get_apikey(gid: int) -> str:
-
-    #请指定下一行代码中yobot的数据库路径
-    db_path = 'C:/CoolQPro/HoshinoBot/hoshino/modules/yobot/yobot/src/client/yobot_data/yobotdata.db'
     conn = sqlite3.connect(db_path)
     cur = conn.cursor()
     cur.execute(f'select apikey from clan_group where group_id={gid}')
@@ -37,8 +58,6 @@ def get_apikey(gid: int) -> str:
     return apikey 
     
 def get_GmServer(gid: int) -> str:
-    #请指定下一行代码中yobot的数据库路径
-    db_path = 'C:/CoolQPro/HoshinoBot/hoshino/modules/yobot/yobot/src/client/yobot_data/yobotdata.db'
     conn = sqlite3.connect(db_path)
     cur = conn.cursor()
     cur.execute(f'select game_server from clan_group where group_id={gid}')
