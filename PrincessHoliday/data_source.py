@@ -19,7 +19,7 @@ def get_web_address():
     if not os.path.isfile(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../"
                                                        "yobot/yobot/src/client/yobot_data/yobotdata.db"))):
         raise OSError
-    web_address = "127.0.0.1" + ":" + str(hoshino.config.PORT)
+    web_address = "http://127.0.0.1" + ":" + str(hoshino.config.PORT)
     return web_address
 
 font_path = os.path.join(os.path.dirname(__file__), 'RZYCY.ttf')
