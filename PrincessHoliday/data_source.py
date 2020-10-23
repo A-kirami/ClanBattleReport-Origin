@@ -19,7 +19,12 @@ def get_web_address():
     if not os.path.isfile(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../"
                                                        "yobot/yobot/src/client/yobot_data/yobotdata.db"))):
         raise OSError
-    web_address = "http://127.0.0.1" + ":" + str(hoshino.config.PORT)
+    config_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../"
+                                               "yobot/yobot/src/client/yobot_data/yobot_config.json"))
+    with open(f'{config_path}', 'r', encoding='utf8')as fp:
+        yobot_config = json.load(fp)
+    website_suffix = str(yobot_config["public_basepath"])
+    web_address = "http://127.0.0.1" + ":" + str(hoshino.config.PORT) + website_suffix
     return web_address
 
 font_path = os.path.join(os.path.dirname(__file__), 'RZYCY.ttf')
@@ -27,9 +32,12 @@ font_path = os.path.join(os.path.dirname(__file__), 'RZYCY.ttf')
 try:
     db_path = get_db_path()
 except OSError:
-    db_path = '' # 若非yobot插件版，请在此处配置数据库路径
-
-
+    db_path = ''
+    '''
+    若非yobot插件版，请在上方配置数据库路径，请使用反斜杠，例：
+    C:/Hoshino/hoshino/modules/yobot/yobot/src/client/yobot_data/yobotdata.db
+    '''
+    
 def add_text(img: Image,text:str,textsize:int,font=font_path,textfill='white',position:tuple=(0,0)):
     #textsize 文字大小
     #font 字体，默认微软雅黑
