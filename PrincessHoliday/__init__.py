@@ -20,7 +20,9 @@ except OSError:
     yobot_url = ''
     '''
     若非yobot插件版，请在上方配置api地址，请填写至yobot根目录，例:
-    https://your.website.here/yobot/
+    https://your.domain.here/yobot/
+    或
+    http://your.ip.here:port/yobot/
     请注意不要漏掉最后的反斜杠！
     '''
 year = datetime.now().strftime('%Y')#年
@@ -72,21 +74,15 @@ async def create_resignation_report(bot, event):
     apikey = get_apikey(gid)
     global game_server
     game_server = get_GmServer(gid)
-    yobot_url_without_port = yobot_url[:-5]
     url_with_port = f'{yobot_url}clan/{gid}/statistics/api/?apikey={apikey}'
-    url_without_port = f'{yobot_url_without_port}clan/{gid}/statistics/api/?apikey={apikey}'
     if not _lmt.check(uid):
         await bot.send(event, f'{_time_limit/3600}小时仅能生成一次报告', at_sender=True)
         return
-    print(url_with_port, url_without_port)
+    #print(url_with_port, url_without_port)
     #访问yobot api获取伤害等信息
     async with aiohttp.ClientSession() as session:
-        try:
-            async with session.get(url_with_port) as resp:
-                data = await resp.json()
-        except:
-            async with session.get(url_without_port) as resp:
-                data = await resp.json()
+        async with session.get(url_with_port) as resp:
+            data = await resp.json()
     clanname = data['groupinfo'][0]['group_name']
     clanname = clanname[:9]
     if clanname == 0:
@@ -266,9 +262,7 @@ async def create_resignation_report(bot, event):
     apikey = get_apikey(gid)
     global game_server
     game_server = get_GmServer(gid)
-    yobot_url_without_port = yobot_url[:-5]
     url_with_port = f'{yobot_url}clan/{gid}/statistics/api/?apikey={apikey}'
-    url_without_port = f'{yobot_url_without_port}clan/{gid}/statistics/api/?apikey={apikey}'
     if not _lmt.check(uid):
         await bot.send(event, f'{_time_limit/3600}小时仅能生成一次报告', at_sender=True)
         return
@@ -276,12 +270,8 @@ async def create_resignation_report(bot, event):
     #print(url)
     #访问yobot api获取伤害等信息
     async with aiohttp.ClientSession() as session:
-        try:
-            async with session.get(url_with_port) as resp:
-                data = await resp.json()
-        except:
-            async with session.get(url_without_port) as resp:
-                data = await resp.json()
+        async with session.get(url_with_port) as resp:
+            data = await resp.json()
     clanname = data['groupinfo'][0]['group_name']
     clanname = clanname[:9]
     challenges: list = data['challenges']
@@ -456,18 +446,12 @@ async def create_resignation_report(bot, ctx, match):
     apikey = get_apikey(gid)
     global game_server
     game_server = get_GmServer(gid)
-    yobot_url_without_port = yobot_url[:-5]
     url_with_port = f'{yobot_url}clan/{gid}/statistics/api/?apikey={apikey}'
-    url_without_port = f'{yobot_url_without_port}clan/{gid}/statistics/api/?apikey={apikey}'
     #print(url)
     #访问yobot api获取伤害等信息
     async with aiohttp.ClientSession() as session:
-        try:
-            async with session.get(url_with_port) as resp:
-                data = await resp.json()
-        except:
-            async with session.get(url_without_port) as resp:
-                data = await resp.json()
+        async with session.get(url_with_port) as resp:
+            data = await resp.json()
     clanname = data['groupinfo'][0]['group_name']
     clanname = clanname[:9]
     challenges: list = data['challenges']
