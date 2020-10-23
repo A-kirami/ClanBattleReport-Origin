@@ -17,7 +17,7 @@ def get_db_path():
 
 def get_web_address():
     if not os.path.isfile(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../"
-                                                       "yobot/yobot/src/client/yobot_data/yobotdata.db"))):
+                                                       "yobot/yobot/src/client/yobot_data/yobot_config.json"))):
         raise OSError
     config_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../"
                                                "yobot/yobot/src/client/yobot_data/yobot_config.json"))
@@ -37,7 +37,7 @@ except OSError:
     若非yobot插件版，请在上方配置数据库路径，请使用反斜杠，例：
     C:/Hoshino/hoshino/modules/yobot/yobot/src/client/yobot_data/yobotdata.db
     '''
-    
+
 def add_text(img: Image,text:str,textsize:int,font=font_path,textfill='white',position:tuple=(0,0)):
     #textsize 文字大小
     #font 字体，默认微软雅黑
