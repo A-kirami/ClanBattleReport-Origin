@@ -73,7 +73,7 @@ async def create_resignation_report(bot, event):
     apikey = get_apikey(gid)
     global game_server
     game_server = get_GmServer(gid)
-    url_with_port = f'{yobot_url}/yobot/clan/{gid}/statistics/api/?apikey={apikey}'
+    url_with_port = f'{yobot_url}clan/{gid}/statistics/api/?apikey={apikey}'
     if not _lmt.check(uid):
         await bot.send(event, f'{_time_limit/3600}小时仅能生成一次报告', at_sender=True)
         return
@@ -248,7 +248,7 @@ async def create_resignation_report(bot, event):
     apikey = get_apikey(gid)
     global game_server
     game_server = get_GmServer(gid)
-    url_with_port = f'{yobot_url}/yobot/clan/{gid}/statistics/api/?apikey={apikey}'
+    url_with_port = f'{yobot_url}clan/{gid}/statistics/api/?apikey={apikey}'
     if not _lmt.check(uid):
         await bot.send(event, f'{_time_limit/3600}小时仅能生成一次报告', at_sender=True)
         return
@@ -402,8 +402,8 @@ async def create_resignation_report(bot, event):
 
 
 @sv.on_rex(r'^看看报告$', normalize=False)
-async def create_resignation_report(bot, ctx, match):
-    if not sv.check_priv(ctx, priv.ADMIN):
+async def create_resignation_report(bot, ctx):
+    if not priv.check_priv(ctx, priv.ADMIN):
         return
     for m in ctx['message']:
         if m.type == 'at' and m.data['qq'] != 'all':
@@ -418,7 +418,7 @@ async def create_resignation_report(bot, ctx, match):
     apikey = get_apikey(gid)
     global game_server
     game_server = get_GmServer(gid)
-    url_with_port = f'{yobot_url}/yobot/clan/{gid}/statistics/api/?apikey={apikey}'
+    url_with_port = f'{yobot_url}clan/{gid}/statistics/api/?apikey={apikey}'
     #print(url)
     #访问yobot api获取伤害等信息
     async with aiohttp.ClientSession() as session:
