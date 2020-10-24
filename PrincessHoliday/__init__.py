@@ -430,8 +430,8 @@ async def create_resignation_report(bot, event):
 
 
 @sv.on_rex(r'^看看报告$', normalize=False)
-async def create_resignation_report(bot, ctx, match):
-    if not sv.check_priv(ctx, priv.ADMIN):
+async def create_resignation_report(bot, ctx):
+    if not priv.check_priv(ctx, priv.ADMIN):
         return
     for m in ctx['message']:
         if m.type == 'at' and m.data['qq'] != 'all':

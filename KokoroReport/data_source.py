@@ -23,8 +23,7 @@ def get_web_address():
     with open(f'{config_path}', 'r', encoding='utf8')as fp:
         yobot_config = json.load(fp)
     website_suffix = str(yobot_config["public_basepath"])
-    web_address = "http://127.0.0.1" + ":" + \
-        str(hoshino.config.PORT) + website_suffix
+    web_address = "http://127.0.0.1" + ":" + str(hoshino.config.PORT) + website_suffix
     return web_address
 
 font_path = os.path.join(os.path.dirname(__file__), 'TXQYW3.ttf')
