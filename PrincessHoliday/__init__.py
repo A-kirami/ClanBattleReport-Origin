@@ -247,6 +247,7 @@ async def create_resignation_report(bot, event):
     base64_str = f'base64://{base64.b64encode(buf.getvalue()).decode()}'
     await bot.send(event, f'[CQ:image,file={base64_str}]')
     _lmt.start_cd(uid)
+    plt.close('all')
 
 @sv.on_keyword(keywords='生成会战报告')
 async def create_resignation_report(bot, event):
@@ -427,6 +428,7 @@ async def create_resignation_report(bot, event):
     base64_str = f'base64://{base64.b64encode(buf.getvalue()).decode()}'
     await bot.send(event, f'[CQ:image,file={base64_str}]')
     _lmt.start_cd(uid)
+    plt.close('all')
 
 
 @sv.on_rex(r'^看看报告$', normalize=False)
@@ -607,3 +609,4 @@ async def create_resignation_report(bot, ctx):
     base64_str = f'base64://{base64.b64encode(buf.getvalue()).decode()}'
     await bot.send(ctx, f'[CQ:image,file={base64_str}]')
     _lmt.start_cd(uid)
+    plt.close('all')
