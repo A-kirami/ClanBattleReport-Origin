@@ -1,9 +1,13 @@
-﻿# ClanBattleReport
+﻿# ClanBattleReport-Origin
 本项目基于[@shewinder](https://github.com/shewinder)和[@mahosho](https://github.com/mahosho)的[hoshino](https://github.com/Ice-Cirno/HoshinoBot)插件``retire``(离职报告)，获取[Yobot](https://github.com/pcrbot/yobot)数据生成当期会战报告书
+
+## 特别注意
+本仓库已**停止更新**，仅作**留档**用  
+建议使用[新版公会战报告书](https://github.com/A-kirami/ClanBattleReport)
 
 ### 你应注意
 1. ClanBattleReport有不同的风格模板，底图与代码需配套使用
-2. “可可萝报告”仅限V1使用，今后更新的其他主题均为V2版本，不再支持V1
+2. 需要hoshino V2版本
 
 ### 如何使用
 0. 使用前请确认yobot的API访问已开启（默认开启，如果你关闭了api访问，请重新启用）
@@ -11,8 +15,8 @@
 2. 将``clanbattlereport``文件夹放入``hoshino``的``modules``文件夹
 3. 安装依赖``pandas``
 4. 为``matplotlib``安装中文字体(Windows系统可以跳过此步骤)，linux系统使用``pip show matplotlib``找到``matplotlib``的安装位置，并将``msyh.ttf``文件复制到``matplotlib/mpl_data``的``font目录``下
-5. 在``__init__.py``里修改链接到的``yobotapi地址``
-6. 在``data_source.py``里修改``yobot的数据库路径``，**linux系统请确认相关文件的访问权限问题**
+5. [**插件版跳过此步骤**]在``__init__.py``里修改链接到的``yobotapi地址``
+6. [**插件版跳过此步骤**]在``data_source.py``里修改``yobot的数据库路径``，**linux系统请确认相关文件的访问权限问题**
 7. 修改``config.py``，在``MODULES_ON``中添加``clanbattlereport``
 
 **正确的文件目录结构应为**
