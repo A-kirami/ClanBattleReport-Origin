@@ -2,7 +2,7 @@
 本项目基于[@shewinder](https://github.com/shewinder)和[@mahosho](https://github.com/mahosho)的[hoshino](https://github.com/Ice-Cirno/HoshinoBot)插件``retire``(离职报告)，获取[Yobot](https://github.com/pcrbot/yobot)数据生成当期会战报告书
 
 ## 特别注意
-本仓库已**停止更新**，仅作**留档**用  
+本仓库为旧版公会战报告书，现已**停止更新**，仅作**留档**用  
 建议使用[新版公会战报告书](https://github.com/A-kirami/ClanBattleReport)
 
 ### 你应注意
